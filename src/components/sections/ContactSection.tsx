@@ -1,6 +1,6 @@
 "use client";
 import { useRef } from "react";
-import { useScroll } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import ScrollReveal, { ScrollRevealItem } from "@/components/ui/ScrollReveal";
 import { ArrowRight, Mail, MapPin, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -82,5 +82,3 @@ export default function ContactSection() {
     </section>
   );
 }
-
-import { motion } from "framer-motion";

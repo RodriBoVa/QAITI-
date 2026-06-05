@@ -6,28 +6,27 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
 const caps = [
-  { title: "Critical Thinking",                  desc: "Deep understanding, analysis, and sound judgment." },
-  { title: "Creative Problem-Solving",            desc: "Creativity and innovation to solve real world challenges." },
-  { title: "Ethical Reasoning",                   desc: "Ethical awareness and responsible decision-making." },
-  { title: "Communication & Collaboration",       desc: "Strong communication and ability to work with others." },
-  { title: "Resilience & Self-Awareness",         desc: "Resilience, well-being, and self understanding." },
-  { title: "Leadership & Decision-Making",        desc: "Confident and responsible future leaders." },
-  { title: "Responsible Use of AI & Technology", desc: "Safe, ethical, and responsible use of AI." },
+  { num: "01", title: "Critical Thinking",                  desc: "Deep understanding, analysis, and sound judgment." },
+  { num: "02", title: "Creative Problem-Solving",            desc: "Creativity and innovation to solve real world challenges." },
+  { num: "03", title: "Ethical Reasoning",                   desc: "Ethical awareness and responsible decision-making." },
+  { num: "04", title: "Communication & Collaboration",       desc: "Strong communication and ability to work with others." },
+  { num: "05", title: "Resilience & Self-Awareness",         desc: "Resilience, well-being, and self understanding." },
+  { num: "06", title: "Leadership & Decision-Making",        desc: "Confident and responsible future leaders." },
+  { num: "07", title: "Responsible Use of AI & Technology", desc: "Safe, ethical, and responsible use of AI." },
 ];
 
-const floatingLabels = ["Critical Thinking", "Creative Problem-Solving", "Ethical Reasoning", "Communication & Collaboration", "Resilience"];
+const floatingLabels = ["Critical Thinking", "Creative Problem-Solving", "Ethical Reasoning", "Communication", "Resilience"];
 
 export default function HISection() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
 
   return (
-    <section ref={ref} id="hi-layer" className="relative py-32 overflow-hidden" style={{ background: "var(--navy-dark,#0F1A2E)" }}>
+    <section ref={ref} id="hi-layer" className="relative py-32" style={{ background: "var(--navy-dark,#0F1A2E)", overflow: "hidden" }}>
       <div className="absolute inset-0 dot-pattern text-[#D4AF5A] opacity-[0.04] pointer-events-none" />
 
       <div className="section-inner relative z-10">
-        <div className="grid lg:grid-cols-2 gap-20 items-center mb-20">
-
+        <div className="grid lg:grid-cols-2 gap-20 items-center mb-24">
           {/* Left */}
           <div>
             <ScrollReveal progress={scrollYProgress} start={0.04} end={0.2} direction="up" fadeOut={false}>
@@ -76,21 +75,12 @@ export default function HISection() {
               <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1000&q=90"
                 alt="Human Intelligence" className="w-full object-cover object-top" style={{ height: "460px" }} />
               <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom,rgba(15,26,46,0.25),rgba(15,26,46,0.6))" }} />
-              {/* Floating labels — staggered via scroll */}
+              {/* Floating labels */}
               {floatingLabels.map((label, i) => (
-                <ScrollRevealItem key={label} progress={scrollYProgress} index={i} baseStart={0.12} step={0.06} direction="up" distance={14} fadeOut={false}>
-                  <div
-                    className="absolute px-3 py-1.5 text-[8.5px] font-bold border rounded-full text-white"
-                    style={{
-                      top: `${14 + i * 15}%`,
-                      left: i % 2 === 0 ? "6%" : "auto",
-                      right: i % 2 !== 0 ? "6%" : "auto",
-                      background: "rgba(7,16,31,0.75)",
-                      borderColor: "rgba(184,150,46,0.4)",
-                      backdropFilter: "blur(8px)",
-                      letterSpacing: "0.06em",
-                    }}
-                  >
+                <ScrollRevealItem key={label} progress={scrollYProgress} index={i} baseStart={0.12} step={0.055} direction="up" distance={12} fadeOut={false}>
+                  <div className="absolute px-3 py-1.5 text-[8.5px] font-bold border rounded-full text-white"
+                    style={{ top: `${14 + i * 15}%`, left: i % 2 === 0 ? "6%" : "auto", right: i % 2 !== 0 ? "6%" : "auto",
+                      background: "rgba(7,16,31,0.75)", borderColor: "rgba(184,150,46,0.4)", backdropFilter: "blur(8px)", letterSpacing: "0.06em" }}>
                     {label}
                   </div>
                 </ScrollRevealItem>
@@ -100,8 +90,8 @@ export default function HISection() {
         </div>
 
         {/* Core capabilities label */}
-        <ScrollReveal progress={scrollYProgress} start={0.4} end={0.52} direction="up" fadeOut={false}>
-          <div className="flex items-center gap-5 mb-10">
+        <ScrollReveal progress={scrollYProgress} start={0.42} end={0.54} direction="up" fadeOut={false}>
+          <div className="flex items-center gap-5 mb-12">
             <Separator className="max-w-[4rem]" style={{ background: "rgba(184,150,46,0.25)" }} />
             <span className="section-tag whitespace-nowrap">Core Capabilities</span>
             <Separator className="max-w-[4rem]" style={{ background: "rgba(184,150,46,0.25)" }} />
@@ -109,25 +99,35 @@ export default function HISection() {
         </ScrollReveal>
 
         {/* Caps grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {caps.map((cap, i) => (
-            <ScrollRevealItem key={cap.title} progress={scrollYProgress} index={i} baseStart={0.48} step={0.038} direction="up" distance={32} fadeOut={false}>
+            <ScrollRevealItem key={cap.title} progress={scrollYProgress} index={i}
+              baseStart={0.48} step={0.04} direction="up" distance={32} fadeOut={false}>
               <motion.div
-                className="flex flex-col items-center text-center p-4 h-full cursor-default border border-white/7 bg-white/4"
-                whileHover={{ background: "rgba(255,255,255,0.09)", borderColor: "rgba(184,150,46,0.35)", y: -3 }}
+                className="group relative p-6 h-full cursor-default"
+                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
+                whileHover={{ background: "rgba(255,255,255,0.08)", borderColor: "rgba(184,150,46,0.3)", y: -4 }}
                 transition={{ duration: 0.22 }}
               >
-                <h3 className="text-[10px] font-bold mb-2 leading-snug uppercase tracking-wide" style={{ color: "rgba(255,255,255,0.85)" }}>
+                <div className="absolute top-0 left-0 right-0 h-[2px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
+                  style={{ background: "linear-gradient(to right,#B8962E,#D4AF5A)" }} />
+                <div className="text-[2rem] font-bold mb-4 leading-none"
+                  style={{ color: "rgba(255,255,255,0.06)", fontFamily: "Georgia,serif", letterSpacing: "-0.04em" }}>
+                  {cap.num}
+                </div>
+                <h3 className="text-[0.78rem] font-bold mb-2 uppercase tracking-[0.1em] leading-snug" style={{ color: "rgba(255,255,255,0.85)" }}>
                   {cap.title}
                 </h3>
-                <p className="text-[9px] leading-relaxed" style={{ color: "rgba(255,255,255,0.35)" }}>{cap.desc}</p>
+                <p className="text-[0.78rem] leading-relaxed" style={{ color: "rgba(255,255,255,0.35)" }}>
+                  {cap.desc}
+                </p>
               </motion.div>
             </ScrollRevealItem>
           ))}
         </div>
 
         {/* Banner */}
-        <ScrollReveal progress={scrollYProgress} start={0.8} end={0.9} direction="up" fadeOut={false}>
+        <ScrollReveal progress={scrollYProgress} start={0.82} end={0.91} direction="up" fadeOut={false}>
           <div className="mt-12 p-6 border text-center" style={{ background: "rgba(184,150,46,0.05)", borderColor: "rgba(184,150,46,0.18)" }}>
             <p className="text-sm" style={{ color: "rgba(255,255,255,0.62)" }}>
               Human intelligence is our greatest advantage.{" "}
