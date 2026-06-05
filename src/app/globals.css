@@ -1,163 +1,129 @@
 @import "tailwindcss";
 
+/* ─── QAITI Design Tokens ──────────────────────────────────── */
 :root {
-  --gold: #B8962E;
-  --gold-light: #D4AF5A;
-  --gold-dark: #8B6E1F;
-  --navy: #1A2744;
-  --navy-dark: #0F1A2E;
-  --cream: #FAF8F4;
-  --cream-dark: #F2EDE4;
-  --text-dark: #111827;
-  --text-muted: #6B7280;
+  --gold:        #B8962E;
+  --gold-light:  #D4AF5A;
+  --gold-dark:   #8B6E1F;
+  --navy:        #1A2744;
+  --navy-mid:    #1A2F55;
+  --navy-dark:   #0F1A2E;
+  --navy-deepest:#07101F;
+  --cream:       #FAF8F4;
+  --cream-dark:  #F2EDE4;
+  --text-dark:   #111827;
+  --text-muted:  #6B7280;
+  --text-light:  #9CA3AF;
+
+  /* shadcn-compatible tokens */
+  --background:  #FAF8F4;
+  --foreground:  #111827;
+  --border:      rgba(184,150,46,0.15);
+  --ring:        #B8962E;
+  --radius:      0.125rem;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+/* ─── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   background-color: var(--cream);
   color: var(--text-dark);
   overflow-x: hidden;
-  font-family: 'Georgia', 'Times New Roman', serif;
-  line-height: 1.6;
-}
-
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--cream); }
-::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
-
-/* ─── Typography ─────────────────────────────────────────── */
-
-h1, h2, h3 {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  letter-spacing: -0.02em;
-}
-
-p, span, button, a, li {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
-}
-
-/* ─── Utility classes ──────────────────────────────────────── */
-
-.section-tag {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+  line-height: 1.65;
+}
+
+/* ─── Headings use serif ─────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 4px; }
+::-webkit-scrollbar-track  { background: var(--cream); }
+::-webkit-scrollbar-thumb  { background: var(--gold); border-radius: 2px; }
+
+/* ─── Section tag (eyebrow label) ───────────────────────────── */
+.section-tag {
   font-size: 0.625rem;
-  letter-spacing: 0.25em;
+  font-weight: 700;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--gold);
-  font-weight: 700;
 }
 
-.gold-line {
-  display: block;
-  width: 2.5rem;
+/* ─── Gold rule ─────────────────────────────────────────────── */
+.gold-rule {
   height: 2px;
-  background: linear-gradient(to right, var(--gold), var(--gold-light));
-  margin-bottom: 1.5rem;
+  width: 2.5rem;
+  background: linear-gradient(90deg, #B8962E, #D4AF5A);
 }
 
-/* ─── Glass card ───────────────────────────────────────────── */
-
-.glass-card {
-  background: rgba(255,255,255,0.55);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(184,150,46,0.12);
+/* ─── Dot background pattern ─────────────────────────────────── */
+.dot-pattern {
+  background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
-.glass-card-dark {
-  background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.08);
+/* ─── Section wrapper ────────────────────────────────────────── */
+.section-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
-/* ─── Section base ─────────────────────────────────────────── */
-
-section {
-  position: relative;
+@media (min-width: 768px) {
+  .section-inner {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
 }
 
-/* ─── Gold gradient text ───────────────────────────────────── */
-
-.text-gradient-gold {
-  background: linear-gradient(135deg, #B8962E 0%, #D4AF5A 50%, #B8962E 100%);
+/* ─── Gradient text ──────────────────────────────────────────── */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #B8962E 0%, #D4AF5A 60%, #B8962E 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* ─── Button styles ────────────────────────────────────────── */
-
-.btn-gold {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.875rem 2rem;
-  background: linear-gradient(135deg, #B8962E, #D4AF5A);
-  color: white;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(184,150,46,0.3);
-}
-
-.btn-gold:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 30px rgba(184,150,46,0.4);
-}
-
-.btn-outline {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.875rem 2rem;
-  background: transparent;
-  color: var(--navy);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  border: 1.5px solid rgba(26,39,68,0.3);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-outline:hover {
-  background: var(--navy);
-  color: white;
-  border-color: var(--navy);
-}
-
-/* ─── Image overlay ─────────────────────────────────────────── */
-
-.img-overlay {
-  position: absolute;
-  inset: 0;
+/* ─── Image overlay ──────────────────────────────────────────── */
+.img-cinematic {
   background: linear-gradient(
     135deg,
-    rgba(26,39,68,0.15) 0%,
-    rgba(184,150,46,0.08) 100%
+    rgba(26,39,68,0.12) 0%,
+    rgba(184,150,46,0.06) 100%
   );
 }
 
-/* ─── Dot pattern ───────────────────────────────────────────── */
-
-.dot-pattern {
-  background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
-  background-size: 28px 28px;
+/* ─── Animations ─────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
 }
+.shimmer {
+  background: linear-gradient(90deg, #B8962E 25%, #D4AF5A 50%, #B8962E 75%);
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+.float { animation: float 4s ease-in-out infinite; }
