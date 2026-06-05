@@ -32,7 +32,7 @@ const features = [
 
 export default function TeacherLabSection() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { margin: "-80px" });
 
   return (
     <section

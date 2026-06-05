@@ -28,7 +28,7 @@ const pillars = [
 
 export default function NationalReadinessSection() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { margin: "-80px" });
 
   return (
     <section

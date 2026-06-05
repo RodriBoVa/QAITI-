@@ -1,128 +1,154 @@
 "use client";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
-import { fadeUp, fadeIn, slideInLeft } from "@/lib/animations";
+import { ArrowRight } from "lucide-react";
 
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  const imageY      = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+  const contentY    = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+  const opacity     = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
+  const scaleImg    = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
 
   return (
-    <section ref={ref} className="relative min-h-screen overflow-hidden bg-[#FAF8F4]">
-      {/* Background image with parallax */}
+    <section ref={ref} className="relative min-h-screen overflow-hidden" style={{ background: "#0F1A2E" }}>
+
+      {/* ── Full-bleed background image ── */}
       <motion.div
-        style={{ y: imageY }}
-        className="absolute inset-0 right-0 left-[35%] z-0"
+        style={{ y: imageY, scale: scaleImg }}
+        className="absolute inset-0 z-0"
       >
-        <div className="relative w-full h-full">
-          <img
-            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1400&q=90"
-            alt="Students with AI technology"
-            className="w-full h-full object-cover object-center"
-          />
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#FAF8F4]/20 to-[#FAF8F4]" />
-          {/* Glowing orb overlay */}
-          <div
-            className="absolute inset-0 opacity-30"
-            style={{
-              background: "radial-gradient(ellipse at 70% 40%, rgba(184,150,46,0.3) 0%, transparent 60%)",
-            }}
-          />
-        </div>
+        <img
+          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&q=90"
+          alt=""
+          className="w-full h-full object-cover object-center"
+        />
+        {/* Dramatic left-to-right gradient */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(100deg, rgba(10,16,35,0.97) 0%, rgba(10,16,35,0.85) 38%, rgba(10,16,35,0.35) 65%, rgba(10,16,35,0.1) 100%)",
+          }}
+        />
+        {/* Gold shimmer top */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(ellipse at 70% 30%, rgba(184,150,46,0.12) 0%, transparent 55%)",
+          }}
+        />
       </motion.div>
 
-      {/* Decorative geometric pattern */}
-      <div className="absolute bottom-20 right-[35%] z-10 opacity-20">
-        <QaitiFlower size={120} />
+      {/* ── Decorative flower mark ── */}
+      <div className="absolute bottom-24 right-[30%] z-10 opacity-10 pointer-events-none">
+        <FlowerMark size={160} />
       </div>
 
-      {/* Content */}
+      {/* ── Content ── */}
       <motion.div
-        style={{ y: textY, opacity }}
-        className="relative z-20 max-w-7xl mx-auto px-6 pt-36 pb-20 min-h-screen flex flex-col justify-center"
+        style={{ y: contentY, opacity }}
+        className="relative z-20 max-w-7xl mx-auto px-8 pt-40 pb-28 min-h-screen flex flex-col justify-center"
       >
-        <div className="max-w-[480px]">
-          {/* Section tag */}
+        <div className="max-w-[560px]">
+
+          {/* Label */}
           <motion.div
-            variants={fadeIn}
-            initial="hidden"
-            animate="visible"
-            custom={0}
-            className="section-tag mb-4"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+            className="section-tag mb-2"
           >
             Section 1
           </motion.div>
-          <div className="w-8 h-[2px] bg-[#B8962E] mb-8" />
+
+          {/* Gold rule */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
+            className="origin-left h-[2px] w-10 mb-8"
+            style={{ background: "linear-gradient(to right,#B8962E,#D4AF5A)" }}
+          />
 
           {/* Headline */}
           <motion.h1
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={0.1}
-            className="text-[3.4rem] leading-[1.05] font-bold mb-6"
-            style={{ color: "var(--navy)", fontFamily: "Georgia, serif" }}
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: [0.22,1,0.36,1] }}
+            className="font-bold mb-7"
+            style={{
+              fontFamily: "Georgia, serif",
+              fontSize: "clamp(2.6rem, 5vw, 4rem)",
+              lineHeight: 1.08,
+              letterSpacing: "-0.025em",
+              color: "white",
+            }}
           >
             Preparing the{" "}
-            <span style={{ color: "var(--gold)" }}>Human</span>{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg,#D4AF5A,#B8962E)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Human
+            </span>{" "}
             Mind
             <br />
             for the AI Era
           </motion.h1>
 
-          {/* Divider */}
+          {/* Gold rule 2 */}
           <motion.div
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="w-8 h-[2px] bg-[#B8962E] mb-6 origin-left"
+            transition={{ duration: 0.6, delay: 0.45 }}
+            className="origin-left h-[2px] w-10 mb-7"
+            style={{ background: "linear-gradient(to right,#B8962E,#D4AF5A)" }}
           />
 
-          {/* Body */}
+          {/* Body text */}
           <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={0.25}
-            className="text-[0.9rem] leading-relaxed mb-3"
-            style={{ color: "var(--text-muted)", fontFamily: "sans-serif" }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.35 }}
+            className="mb-2 leading-relaxed"
+            style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.95rem" }}
           >
-            QAITI is a national AI and technology preparedness platform designed
-            to equip students, empower teachers, and build the human capability
-            required for the age of artificial intelligence.
+            QAITI is a national AI and technology preparedness platform designed to
+            equip students, empower teachers, and build the human capability required
+            for the age of artificial intelligence.
           </motion.p>
 
           <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={0.35}
-            className="text-sm font-semibold mb-8"
-            style={{ color: "var(--gold)", fontFamily: "sans-serif" }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.45 }}
+            className="mb-10 text-sm font-semibold tracking-wide"
+            style={{ color: "var(--gold-light, #D4AF5A)" }}
           >
             Built in Qatar. Designed for global impact.
           </motion.p>
 
           {/* Quote card */}
           <motion.div
-            variants={slideInLeft}
-            initial="hidden"
-            animate="visible"
-            custom={0.4}
-            className="flex items-center gap-4 p-4 mb-8 border border-[#B8962E]/20 bg-white/60 backdrop-blur-sm rounded-sm"
+            initial={{ opacity: 0, x: -24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.22,1,0.36,1] }}
+            className="flex items-center gap-5 p-5 mb-10"
+            style={{
+              background: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(184,150,46,0.25)",
+              backdropFilter: "blur(12px)",
+            }}
           >
-            <div className="shrink-0 w-10 h-10 flex items-center justify-center">
-              <QaitiIcon />
+            <div className="shrink-0">
+              <FlowerMark size={44} />
             </div>
-            <p
-              className="text-[0.82rem] leading-snug"
-              style={{ color: "var(--navy)", fontFamily: "sans-serif" }}
-            >
+            <p className="text-sm leading-snug font-medium" style={{ color: "rgba(255,255,255,0.8)" }}>
               QAITI prepares the minds
               <br />
               that will use AI.
@@ -131,21 +157,17 @@ export default function HeroSection() {
 
           {/* CTAs */}
           <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={0.5}
-            className="flex gap-3 flex-wrap"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.6 }}
+            className="flex gap-4 flex-wrap"
           >
-            <button
-              className="flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:opacity-90 hover:translate-x-1"
-              style={{ background: "var(--gold)", fontFamily: "sans-serif" }}
-            >
+            <button className="btn-gold">
               Explore the Vision <ArrowRight size={14} />
             </button>
             <button
-              className="flex items-center gap-2 px-6 py-3 text-sm font-semibold border transition-all duration-300 hover:bg-[#1A2744] hover:text-white hover:border-[#1A2744]"
-              style={{ borderColor: "var(--navy)", color: "var(--navy)", fontFamily: "sans-serif" }}
+              className="inline-flex items-center gap-2 px-8 py-[0.875rem] text-[0.8125rem] font-semibold tracking-wide uppercase border transition-all duration-300 hover:bg-white/10"
+              style={{ borderColor: "rgba(255,255,255,0.25)", color: "rgba(255,255,255,0.85)" }}
             >
               Contact Us <ArrowRight size={14} />
             </button>
@@ -153,28 +175,26 @@ export default function HeroSection() {
         </div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* ── Scroll indicator ── */}
       <motion.div
         style={{ opacity }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
+        transition={{ delay: 1.3 }}
       >
         <div
-          className="w-5 h-8 border-2 rounded-full flex justify-center pt-1.5"
-          style={{ borderColor: "var(--text-muted)" }}
+          className="w-[22px] h-9 border rounded-full flex justify-center pt-2"
+          style={{ borderColor: "rgba(255,255,255,0.25)" }}
         >
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-            className="w-1 h-1 rounded-full bg-[#B8962E]"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+            className="w-[3px] h-[3px] rounded-full"
+            style={{ background: "var(--gold)" }}
           />
         </div>
-        <span
-          className="text-[10px] tracking-widest uppercase"
-          style={{ color: "var(--text-muted)", fontFamily: "sans-serif" }}
-        >
+        <span className="section-tag" style={{ color: "rgba(255,255,255,0.35)", letterSpacing: "0.2em" }}>
           Scroll to explore
         </span>
       </motion.div>
@@ -182,40 +202,17 @@ export default function HeroSection() {
   );
 }
 
-function QaitiFlower({ size = 60 }: { size?: number }) {
+function FlowerMark({ size = 60 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 60 60" fill="none">
-      <g opacity="0.8">
-        {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((deg, i) => (
-          <ellipse
-            key={i}
-            cx="30" cy="30" rx="4" ry="12"
-            fill="none"
-            stroke="#B8962E"
-            strokeWidth="1.5"
-            transform={`rotate(${deg} 30 30)`}
-          />
-        ))}
-        <circle cx="30" cy="30" r="4" fill="#B8962E" />
-      </g>
-    </svg>
-  );
-}
-
-function QaitiIcon() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 60 60" fill="none">
-      {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((deg, i) => (
+      {[0,30,60,90,120,150,180,210,240,270,300,330].map((deg,i) => (
         <ellipse
-          key={i}
-          cx="30" cy="30" rx="3.5" ry="10"
-          fill="none"
-          stroke="#B8962E"
-          strokeWidth="1.5"
+          key={i} cx="30" cy="30" rx="4" ry="13"
+          fill="none" stroke="#B8962E" strokeWidth="1.5"
           transform={`rotate(${deg} 30 30)`}
         />
       ))}
-      <circle cx="30" cy="30" r="3" fill="#B8962E" />
+      <circle cx="30" cy="30" r="4" fill="#B8962E" />
     </svg>
   );
 }

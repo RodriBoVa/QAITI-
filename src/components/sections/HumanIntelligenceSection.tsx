@@ -4,155 +4,137 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { staggerContainer, cardVariant, fadeUp, slideInRight } from "@/lib/animations";
 
 const capabilities = [
-  { icon: "💡", title: "Think", desc: "Develop deep understanding, analysis, and critical thinking." },
-  { icon: "✏️", title: "Create", desc: "Empower creativity and innovation with purpose." },
-  { icon: "🤝", title: "Collaborate", desc: "Build strong communication and collaboration skills." },
-  { icon: "⚖️", title: "Decide Responsibly", desc: "Strengthen ethical reasoning and responsible decision-making." },
-  { icon: "🚀", title: "Lead", desc: "Prepare future leaders who create positive impact." },
-  { icon: "🌍", title: "Transform the Future", desc: "Shape a world where human intelligence drives meaningful change." },
+  { emoji: "💡", title: "Think", desc: "Develop deep understanding, analysis, and critical thinking." },
+  { emoji: "✏️", title: "Create", desc: "Empower creativity and innovation with purpose." },
+  { emoji: "🤝", title: "Collaborate", desc: "Build strong communication and collaboration skills." },
+  { emoji: "⚖️", title: "Decide Responsibly", desc: "Strengthen ethical reasoning and responsible decision-making." },
+  { emoji: "🚀", title: "Lead", desc: "Prepare future leaders who create positive impact." },
+  { emoji: "🌍", title: "Transform", desc: "Shape a world where human intelligence drives meaningful change." },
 ];
 
 export default function HumanIntelligenceSection() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { margin: "-80px" });
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const imageY = useTransform(scrollYProgress, [0, 1], ["5%", "-5%"]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["4%", "-4%"]);
 
   return (
-    <section
-      ref={ref}
-      id="hi"
-      className="relative py-24 overflow-hidden"
-      style={{ background: "var(--cream)" }}
-    >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section ref={ref} id="hi" className="relative py-32 overflow-hidden" style={{ background: "var(--cream)" }}>
+      <div className="max-w-7xl mx-auto px-8">
+
+        <div className="grid lg:grid-cols-2 gap-20 items-center mb-20">
           {/* Left */}
           <div>
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-              custom={0}
-              className="section-tag mb-3"
-            >
+            <motion.p variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"} className="section-tag mb-2">
               Section 4
-            </motion.div>
-            <div className="w-8 h-[2px] bg-[#B8962E] mb-6" />
-
+            </motion.p>
+            <motion.div
+              initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
+              transition={{ duration: 0.55 }}
+              className="origin-left h-[2px] w-10 mb-8"
+              style={{ background: "linear-gradient(to right,#B8962E,#D4AF5A)" }}
+            />
             <motion.h2
-              variants={fadeUp}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-              custom={0.1}
-              className="text-[2.8rem] leading-[1.1] font-bold mb-6"
-              style={{ color: "var(--navy)", fontFamily: "Georgia, serif" }}
+              variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"}
+              className="font-bold mb-7"
+              style={{
+                fontFamily: "Georgia, serif",
+                fontSize: "clamp(2.2rem,4vw,3.2rem)",
+                lineHeight: 1.1,
+                letterSpacing: "-0.025em",
+                color: "var(--navy)",
+              }}
             >
               Preparing Human{" "}
-              <span style={{ color: "var(--gold)" }}>Intelligence</span> for an
+              <span style={{ background: "linear-gradient(135deg,#B8962E,#D4AF5A)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                Intelligence
+              </span>{" "}
+              for an
+              <br />
               AI-Powered Future
             </motion.h2>
 
-            <div className="w-8 h-[2px] bg-[#B8962E] mb-6" />
+            <motion.div
+              initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
+              transition={{ duration: 0.55, delay: 0.15 }}
+              className="origin-left h-[2px] w-10 mb-7"
+              style={{ background: "linear-gradient(to right,#B8962E,#D4AF5A)" }}
+            />
 
             <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-              custom={0.2}
-              className="text-sm leading-relaxed mb-8"
-              style={{ color: "var(--text-muted)", fontFamily: "sans-serif" }}
+              variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"}
+              className="text-[0.95rem] leading-relaxed mb-9"
+              style={{ color: "var(--text-muted)" }}
             >
-              Our vision is to help make Qatar a global benchmark for AI-era human
-              capability by preparing students not only to understand technology,
-              but to think, create, decide, collaborate, and lead responsibly in a
-              world shaped by artificial intelligence.
+              Our vision is to help make Qatar a global benchmark for AI-era human capability by preparing
+              students not only to understand technology, but to think, create, decide, collaborate, and
+              lead responsibly in a world shaped by artificial intelligence.
             </motion.p>
 
             {/* Quote */}
             <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-              custom={0.3}
-              className="relative p-6 border border-[#B8962E]/20 bg-white/60"
+              variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"}
+              className="relative p-7"
+              style={{ background: "rgba(255,255,255,0.7)", border: "1px solid rgba(184,150,46,0.15)", backdropFilter: "blur(8px)" }}
             >
               <div
-                className="absolute top-4 left-4 text-5xl leading-none font-serif"
-                style={{ color: "var(--gold)", opacity: 0.3 }}
+                className="absolute top-4 left-5 font-serif leading-none select-none"
+                style={{ fontSize: "4rem", color: "#B8962E", opacity: 0.2, fontFamily: "Georgia" }}
               >
                 "
               </div>
-              <p
-                className="text-sm leading-relaxed pl-6 font-medium"
-                style={{ color: "var(--navy)", fontFamily: "sans-serif" }}
-              >
+              <p className="text-[0.9rem] leading-relaxed pl-6 font-semibold" style={{ color: "var(--navy)" }}>
                 QAITI prepares the human mind behind the technology.
               </p>
+              <div className="mt-3 pl-6">
+                <div className="h-[1px] w-8" style={{ background: "var(--gold)" }} />
+              </div>
             </motion.div>
           </div>
 
           {/* Right image with parallax */}
-          <motion.div
-            style={{ y: imageY }}
-            className="relative"
-          >
+          <motion.div style={{ y: imageY }}>
             <motion.div
-              variants={slideInRight}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-              custom={0.1}
-              className="relative rounded-sm overflow-hidden shadow-2xl"
+              variants={slideInRight} initial="hidden" animate={inView ? "visible" : "hidden"}
+              className="relative overflow-hidden shadow-2xl"
+              style={{ borderRadius: "2px" }}
             >
               <img
-                src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=900&q=85"
+                src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1000&q=90"
                 alt="Students looking at cityscape"
-                className="w-full h-[480px] object-cover"
+                className="w-full object-cover"
+                style={{ height: "500px" }}
               />
+              <div className="img-overlay" />
               <div
                 className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(to bottom, transparent 60%, rgba(250,248,244,0.4))",
-                }}
-              />
-              {/* AI network overlay effect */}
-              <div
-                className="absolute inset-0 opacity-20"
-                style={{
-                  background: "radial-gradient(ellipse at 70% 20%, rgba(184,150,46,0.6) 0%, transparent 50%)",
-                }}
+                style={{ background: "radial-gradient(ellipse at 65% 20%, rgba(184,150,46,0.2) 0%, transparent 55%)" }}
               />
             </motion.div>
+            {/* Accent corner */}
+            <div
+              className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 pointer-events-none"
+              style={{ borderColor: "rgba(184,150,46,0.3)" }}
+            />
           </motion.div>
         </div>
 
         {/* Capability grid */}
         <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-16"
+          variants={staggerContainer} initial="hidden" animate={inView ? "visible" : "hidden"}
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
         >
           {capabilities.map((cap) => (
             <motion.div
               key={cap.title}
               variants={cardVariant}
-              className="flex flex-col items-center text-center p-5 border border-[#B8962E]/15 bg-white/50 hover:bg-white hover:shadow-md hover:border-[#B8962E]/40 transition-all duration-300"
+              className="flex flex-col items-center text-center p-6 cursor-default"
+              style={{ background: "rgba(255,255,255,0.6)", border: "1px solid rgba(184,150,46,0.1)" }}
+              whileHover={{ y: -4, boxShadow: "0 12px 40px rgba(184,150,46,0.12)" }}
             >
-              <span className="text-2xl mb-3">{cap.icon}</span>
-              <h3
-                className="text-xs font-bold mb-2"
-                style={{ color: "var(--navy)", fontFamily: "sans-serif" }}
-              >
-                {cap.title}
-              </h3>
-              <p
-                className="text-[10px] leading-relaxed"
-                style={{ color: "var(--text-muted)", fontFamily: "sans-serif" }}
-              >
-                {cap.desc}
-              </p>
+              <span className="text-2xl mb-4">{cap.emoji}</span>
+              <h3 className="text-xs font-bold mb-2 uppercase tracking-wide" style={{ color: "var(--navy)" }}>{cap.title}</h3>
+              <p className="text-[10px] leading-relaxed" style={{ color: "var(--text-muted)" }}>{cap.desc}</p>
             </motion.div>
           ))}
         </motion.div>
